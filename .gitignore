@@ -1,2 +1,7 @@
 CVS
 */CVS
+nbproject
+log/development.log
+*.DS_Store
+.cvsignore
+*sqlite3
