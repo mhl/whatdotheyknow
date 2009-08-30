@@ -69,24 +69,24 @@ class InfoRequestEvent < ActiveRecord::Base
     ]
 
     # Full text search indexing
-    acts_as_xapian :texts => [ :search_text_main, :title ],
-        :values => [ 
-                     [ :created_at, 0, "range_search", :date ], # for QueryParser range searches e.g. 01/01/2008..14/01/2008
-                     [ :created_at_numeric, 1, "created_at", :number ], # for sorting
-                     [ :described_at_numeric, 2, "described_at", :number ], # XXX using :number for lack of :datetime support in Xapian values
-                     [ :request, 3, "request_collapse", :string ],
-                     [ :request_title_collapse, 4, "request_title_collapse", :string ]
-                   ],
-        :terms => [ [ :calculated_state, 'S', "status" ],
-                [ :requested_by, 'B', "requested_by" ],
-                [ :requested_from, 'F', "requested_from" ],
-                [ :commented_by, 'C', "commented_by" ],
-                [ :request, 'R', "request" ],
-                [ :variety, 'V', "variety" ],
-                [ :filetype, 'T', "filetype" ]
-        ],
-        :if => :indexed_by_search?,
-        :eager_load => [ :incoming_message, :outgoing_message, :comment, { :info_request => [ :user, :public_body, :censor_rules ] } ]
+#    acts_as_xapian :texts => [ :search_text_main, :title ],
+#        :values => [
+#                     [ :created_at, 0, "range_search", :date ], # for QueryParser range searches e.g. 01/01/2008..14/01/2008
+#                     [ :created_at_numeric, 1, "created_at", :number ], # for sorting
+#                     [ :described_at_numeric, 2, "described_at", :number ], # XXX using :number for lack of :datetime support in Xapian values
+#                     [ :request, 3, "request_collapse", :string ],
+#                     [ :request_title_collapse, 4, "request_title_collapse", :string ]
+#                   ],
+#        :terms => [ [ :calculated_state, 'S', "status" ],
+#                [ :requested_by, 'B', "requested_by" ],
+#                [ :requested_from, 'F', "requested_from" ],
+#                [ :commented_by, 'C', "commented_by" ],
+#                [ :request, 'R', "request" ],
+#                [ :variety, 'V', "variety" ],
+#                [ :filetype, 'T', "filetype" ]
+#        ],
+#        :if => :indexed_by_search?,
+#        :eager_load => [ :incoming_message, :outgoing_message, :comment, { :info_request => [ :user, :public_body, :censor_rules ] } ]
 
     def requested_by
         self.info_request.user.url_name

@@ -6,13 +6,13 @@
 # ENV['RAILS_ENV'] ||= 'production'
 
 # Specifies gem version of Rails to use when vendor/rails is not present
-RAILS_GEM_VERSION = '2.1.0' unless defined? RAILS_GEM_VERSION
+RAILS_GEM_VERSION = '2.3.3' unless defined? RAILS_GEM_VERSION
 
 # Bootstrap the Rails environment, frameworks, and default configuration
 require File.join(File.dirname(__FILE__), 'boot')
 
 # MySociety specific helper functions
-$:.push(File.join(File.dirname(__FILE__), '../../rblib'))
+$:.push(File.join(RAILS_ROOT, 'lib'))
 # ... if these fail to include, you need the rblib directory from
 # mySociety CVS, put it at the same level as the foi directory.
 load "validate.rb"
@@ -95,7 +95,7 @@ ActionView::Helpers::TagHelper.module_eval do
 end
 
 # Domain for URLs (so can work for scripts, not just web pages)
-ActionController::UrlWriter.default_url_options[:host] = MySociety::Config.get("DOMAIN", 'localhost:3000')
+#ActionController::UrlWriter.default_url_options[:host] = MySociety::Config.get("DOMAIN", 'localhost:3000')
 
 # So that javascript assets use full URL, so proxied admin URLs read javascript OK
 if (MySociety::Config.get("DOMAIN", "") != "")

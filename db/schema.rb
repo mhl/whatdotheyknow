@@ -148,20 +148,20 @@ ActiveRecord::Schema.define(:version => 79) do
   end
 
   create_table "public_bodies", :force => true do |t|
-    t.text     "name",                               :null => false
-    t.text     "short_name",                         :null => false
-    t.text     "request_email",                      :null => false
-    t.integer  "version",                            :null => false
-    t.string   "last_edit_editor",                   :null => false
-    t.text     "last_edit_comment",                  :null => false
-    t.datetime "created_at",                         :null => false
-    t.datetime "updated_at",                         :null => false
-    t.text     "url_name",                           :null => false
-    t.text     "home_page",          :default => "", :null => false
-    t.text     "notes",              :default => "", :null => false
-    t.string   "first_letter",                       :null => false
-    t.text     "publication_scheme", :default => "", :null => false
-    t.text     "charity_number",     :default => "", :null => false
+    t.text     "name",                                              :null => false
+    t.text     "short_name",                                        :null => false
+    t.text     "request_email",                                     :null => false
+    t.integer  "version",                                           :null => false
+    t.string   "last_edit_editor",                                  :null => false
+    t.text     "last_edit_comment",  :limit => 255,                 :null => false
+    t.datetime "created_at",                                        :null => false
+    t.datetime "updated_at",                                        :null => false
+    t.text     "url_name",                                          :null => false
+    t.text     "home_page",                         :default => "", :null => false
+    t.text     "notes",                             :default => "", :null => false
+    t.string   "first_letter",                                      :null => false
+    t.text     "publication_scheme",                :default => "", :null => false
+    t.text     "charity_number",                    :default => "", :null => false
   end
 
   add_index "public_bodies", ["first_letter"], :name => "index_public_bodies_on_first_letter"
@@ -173,7 +173,7 @@ ActiveRecord::Schema.define(:version => 79) do
     t.datetime "created_at",     :null => false
   end
 
-  add_index "public_body_tags", ["name", "public_body_id"], :name => "index_public_body_tags_on_public_body_id_and_name", :unique => true
+  add_index "public_body_tags", ["public_body_id", "name"], :name => "index_public_body_tags_on_public_body_id_and_name", :unique => true
 
   create_table "public_body_versions", :force => true do |t|
     t.integer  "public_body_id"
@@ -183,12 +183,12 @@ ActiveRecord::Schema.define(:version => 79) do
     t.text     "request_email"
     t.datetime "updated_at"
     t.string   "last_edit_editor"
-    t.text     "last_edit_comment"
+    t.text     "last_edit_comment",  :limit => 255
     t.text     "url_name"
     t.text     "home_page"
     t.text     "notes"
-    t.text     "publication_scheme", :default => "", :null => false
-    t.text     "charity_number",     :default => "", :null => false
+    t.text     "publication_scheme",                :default => "", :null => false
+    t.text     "charity_number",                    :default => "", :null => false
   end
 
   create_table "raw_emails", :force => true do |t|
@@ -196,18 +196,18 @@ ActiveRecord::Schema.define(:version => 79) do
   end
 
   create_table "track_things", :force => true do |t|
-    t.integer  "tracking_user_id", :null => false
-    t.string   "track_query",      :null => false
+    t.integer  "tracking_user_id",                               :null => false
+    t.string   "track_query",                                    :null => false
     t.integer  "info_request_id"
     t.integer  "tracked_user_id"
     t.integer  "public_body_id"
-    t.string   "track_medium",     :null => false
-    t.string   "track_type",       :null => false
+    t.string   "track_medium",                                   :null => false
+    t.string   "track_type",       :default => "internal_error", :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "track_things", ["track_query", "tracking_user_id"], :name => "index_track_things_on_tracking_user_id_and_track_query", :unique => true
+  add_index "track_things", ["tracking_user_id", "track_query"], :name => "index_track_things_on_tracking_user_id_and_track_query", :unique => true
 
   create_table "track_things_sent_emails", :force => true do |t|
     t.integer  "track_thing_id",        :null => false
@@ -226,8 +226,6 @@ ActiveRecord::Schema.define(:version => 79) do
     t.string  "alert_type",            :null => false
     t.integer "info_request_event_id"
   end
-
-  add_index "user_info_request_sent_alerts", ["alert_type", "info_request_id", "user_id"], :name => "user_info_request_sent_alerts_unique_index", :unique => true
 
   create_table "users", :force => true do |t|
     t.string   "email",                                                     :null => false

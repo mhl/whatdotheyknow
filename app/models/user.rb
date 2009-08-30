@@ -51,11 +51,11 @@ class User < ActiveRecord::Base
         'super', 
     ]
 
-    acts_as_xapian :texts => [ :name ],
-        :values => [ 
-             [ :created_at_numeric, 1, "created_at", :number ] # for sorting
-        ],
-        :terms => [ [ :variety, 'V', "variety" ] ]
+#    acts_as_xapian :texts => [ :name ],
+#        :values => [
+#             [ :created_at_numeric, 1, "created_at", :number ] # for sorting
+#        ],
+#        :terms => [ [ :variety, 'V', "variety" ] ]
     def created_at_numeric
         # format it here as no datetime support in Xapian's value ranges
         return self.created_at.strftime("%Y%m%d%H%M%S") 
