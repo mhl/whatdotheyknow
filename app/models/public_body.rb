@@ -505,6 +505,9 @@ class PublicBody < ActiveRecord::Base
         self.notes.gsub(/<\/?[^>]*>/, "")
     end
 
+    class << self
+      def most_popular limit = 32
+        PublicBody.find(:all, :limit => limit, :order => "info_requests_count desc")
+      end
+    end
 end
-
-

@@ -10,27 +10,20 @@
 class GeneralController < ApplicationController
 
     # New, improved front page!
-    def frontpage
-        # This is too slow
-        #@popular_bodies = PublicBody.find(:all, :select => "*, (select count(*) from info_requests where info_requests.public_body_id = public_bodies.id) as c", :order => "c desc", :limit => 32)
-
-        # Just hardcode some popular authorities for now
-        @popular_bodies = PublicBody.find(:all, :conditions => ["url_name in ('bbc', 'dwp', 'dh', 'local_government_ombudsmen', 'royal_mail_group', 'mod', 'lambeth_borough_council', 'edinburgh_council')"])
-
-        # This is too slow
-        #@random_requests = InfoRequest.find(:all, :order => "random()", :limit => 8, :conditions => ["described_state = ? and prominence = ?", 'successful', 'normal'] )
+    def index
+      @popular_bodies = PublicBody.most_popular
         
-        # Get some successful requests 
-        begin
-            query = 'variety:response (status:successful OR status:partially_successful)'
-            sortby = "described"
-            @xapian_object = perform_search([InfoRequestEvent], query, sortby, 'request_title_collapse', 8)
-            @successful_requests = @xapian_object.results.map { |r| r[:model].info_request }
-        rescue
-            @successful_requests = []
-        end
+      # Get some successful requests
+      begin
+          query = 'variety:response (status:successful OR status:partially_successful)'
+          sortby = "described"
+          @xapian_object = perform_search([InfoRequestEvent], query, sortby, 'request_title_collapse', 8)
+          @successful_requests = @xapian_object.results.map { |r| r[:model].info_request }
+      rescue
+          @successful_requests = []
+      end
 
-        cache_in_squid
+      cache_in_squid
     end
 
     # Just does a redirect from ?query= search to /query
