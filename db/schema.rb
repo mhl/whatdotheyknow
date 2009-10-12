@@ -109,8 +109,6 @@ ActiveRecord::Schema.define(:version => 79) do
   end
 
   add_index "info_requests", ["created_at"], :name => "index_info_requests_on_created_at"
-  add_index "info_requests", ["title"], :name => "index_info_requests_on_title"
-  add_index "info_requests", ["url_title"], :name => "index_info_requests_on_url_title", :unique => true
 
   create_table "outgoing_messages", :force => true do |t|
     t.integer  "info_request_id",              :null => false
@@ -127,19 +125,17 @@ ActiveRecord::Schema.define(:version => 79) do
   add_index "outgoing_messages", ["what_doing"], :name => "index_outgoing_messages_on_what_doing"
 
   create_table "post_redirects", :force => true do |t|
-    t.text     "token",                                    :null => false
-    t.text     "uri",                                      :null => false
+    t.text     "token",              :null => false
+    t.text     "uri",                :null => false
     t.text     "post_params_yaml"
-    t.datetime "created_at",                               :null => false
-    t.datetime "updated_at",                               :null => false
-    t.text     "email_token",                              :null => false
+    t.datetime "created_at",         :null => false
+    t.datetime "updated_at",         :null => false
+    t.text     "email_token",        :null => false
     t.text     "reason_params_yaml"
     t.integer  "user_id"
-    t.text     "circumstance",       :default => "normal", :null => false
+    t.text     "circumstance",       :null => false
   end
 
-  add_index "post_redirects", ["email_token"], :name => "index_post_redirects_on_email_token"
-  add_index "post_redirects", ["token"], :name => "index_post_redirects_on_token"
   add_index "post_redirects", ["updated_at"], :name => "index_post_redirects_on_updated_at"
 
   create_table "profile_photos", :force => true do |t|
@@ -148,32 +144,29 @@ ActiveRecord::Schema.define(:version => 79) do
   end
 
   create_table "public_bodies", :force => true do |t|
-    t.text     "name",                                              :null => false
-    t.text     "short_name",                                        :null => false
-    t.text     "request_email",                                     :null => false
-    t.integer  "version",                                           :null => false
-    t.string   "last_edit_editor",                                  :null => false
-    t.text     "last_edit_comment",  :limit => 255,                 :null => false
-    t.datetime "created_at",                                        :null => false
-    t.datetime "updated_at",                                        :null => false
-    t.text     "url_name",                                          :null => false
-    t.text     "home_page",                         :default => "", :null => false
-    t.text     "notes",                             :default => "", :null => false
-    t.string   "first_letter",                                      :null => false
-    t.text     "publication_scheme",                :default => "", :null => false
-    t.text     "charity_number",                    :default => "", :null => false
+    t.text     "name",               :null => false
+    t.text     "short_name",         :null => false
+    t.text     "request_email",      :null => false
+    t.integer  "version",            :null => false
+    t.string   "last_edit_editor",   :null => false
+    t.text     "last_edit_comment",  :null => false
+    t.datetime "created_at",         :null => false
+    t.datetime "updated_at",         :null => false
+    t.text     "url_name",           :null => false
+    t.text     "home_page",          :null => false
+    t.text     "notes",              :null => false
+    t.string   "first_letter",       :null => false
+    t.text     "publication_scheme", :null => false
+    t.text     "charity_number",     :null => false
   end
 
   add_index "public_bodies", ["first_letter"], :name => "index_public_bodies_on_first_letter"
-  add_index "public_bodies", ["url_name"], :name => "index_public_bodies_on_url_name", :unique => true
 
   create_table "public_body_tags", :force => true do |t|
     t.integer  "public_body_id", :null => false
     t.text     "name",           :null => false
     t.datetime "created_at",     :null => false
   end
-
-  add_index "public_body_tags", ["public_body_id", "name"], :name => "index_public_body_tags_on_public_body_id_and_name", :unique => true
 
   create_table "public_body_versions", :force => true do |t|
     t.integer  "public_body_id"
@@ -183,12 +176,12 @@ ActiveRecord::Schema.define(:version => 79) do
     t.text     "request_email"
     t.datetime "updated_at"
     t.string   "last_edit_editor"
-    t.text     "last_edit_comment",  :limit => 255
+    t.text     "last_edit_comment"
     t.text     "url_name"
     t.text     "home_page"
     t.text     "notes"
-    t.text     "publication_scheme",                :default => "", :null => false
-    t.text     "charity_number",                    :default => "", :null => false
+    t.text     "publication_scheme", :null => false
+    t.text     "charity_number",     :null => false
   end
 
   create_table "raw_emails", :force => true do |t|
@@ -238,10 +231,8 @@ ActiveRecord::Schema.define(:version => 79) do
     t.text     "url_name",                                                  :null => false
     t.datetime "last_daily_track_email", :default => '2000-01-01 00:00:00'
     t.string   "admin_level",            :default => "none",                :null => false
-    t.text     "ban_text",               :default => "",                    :null => false
+    t.text     "ban_text",                                                  :null => false
     t.integer  "profile_photo_id"
   end
-
-  add_index "users", ["url_name"], :name => "index_users_on_url_name", :unique => true
 
 end

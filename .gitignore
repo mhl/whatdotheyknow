@@ -5,3 +5,4 @@ log/development.log
 *.DS_Store
 .cvsignore
 *sqlite3
+config/database.yml

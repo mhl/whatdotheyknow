@@ -1,8 +1,8 @@
 class AddCircumstanceToPostRedirect < ActiveRecord::Migration
   def self.up
-        add_column :post_redirects, :circumstance, :text, :default => "normal"
+        add_column :post_redirects, :circumstance, :text
         PostRedirect.update_all "circumstance = 'normal'"
-        change_column :post_redirects, :circumstance, :text, :default => "normal", :null => false
+        change_column :post_redirects, :circumstance, :text,  :null => false
   end
 
   def self.down
