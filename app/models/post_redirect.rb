@@ -71,11 +71,11 @@ class PostRedirect < ActiveRecord::Base
     # Make the token 
     def after_initialize
         # The token is used to return you to what you are doing after the login form.
-        if not self.token
+        if self.token.blank?
             self.token = PostRedirect.generate_random_token
         end
         # There is a separate token to use in the URL if we send a confirmation email.
-        if not self.email_token
+        if self.email_token.blank?
             self.email_token = PostRedirect.generate_random_token
         end
     end

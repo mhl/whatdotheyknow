@@ -19,7 +19,7 @@ describe HelpController, "when using help" do
                 :message => "You really should know!!!\n\nVinny",
             }, :submitted_contact_form => 1
         }
-        response.should redirect_to(:controller => 'general', :action => 'frontpage')
+        response.should redirect_to(:controller => 'general', :action => 'index')
 
         deliveries = ActionMailer::Base.deliveries
         deliveries.size.should  == 1

@@ -9,7 +9,7 @@ describe GeneralController, "when searching" do
     end
 
     it "should render the front page successfully" do
-        get :frontpage
+        get :index
         response.should be_success
     end
 

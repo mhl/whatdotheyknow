@@ -176,7 +176,7 @@ describe UserController, "when signing out" do
         session[:user_id] = users(:bob_smith_user).id
         get :signout
         session[:user_id].should be_nil
-        response.should redirect_to(:controller => 'general', :action => 'frontpage')
+        response.should redirect_to(:controller => 'general', :action => 'index')
     end
 
     it "should log you out and redirect you to where you were" do

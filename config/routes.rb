@@ -7,6 +7,12 @@
 # $Id: routes.rb,v 1.89 2009-07-01 11:07:19 francis Exp $
 
 ActionController::Routing::Routes.draw do |map|
+  map.bodies_by_category "/bodies/by_category/:category", :controller => "public_bodies", :action => "by_category"
+  map.list_requests "/requests/:status", :requirements => {:status => /[a-z]+/}, :controller => :requests, :status => "successful"
+  map.resources :public_bodies, :as => "bodies", :shallow => true, :member => {:view_email => [:get, :post]} do |public_body|
+    public_body.resources :info_requests, :as => "requests"
+  end
+  map.resources :help, :collection => {:about => :get}, :only => []
 
     # The priority is based upon order of creation: first created -> highest priority.
 
@@ -15,8 +21,8 @@ ActionController::Routing::Routes.draw do |map|
     # Keep in mind you can assign values other than :controller and :action
     
     map.with_options :controller => 'general' do |general|
-        general.frontpage           '/',            :action => 'frontpage'
-
+        general.frontpage '/general', :action => 'index'
+    
         general.search_redirect '/search',      :action => 'search_redirect'
         # XXX combined is the search query, and then if sorted a "/newest" at the end.
         # Couldn't find a way to do this in routes which also picked up multiple other slashes

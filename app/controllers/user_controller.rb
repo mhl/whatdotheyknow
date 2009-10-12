@@ -154,7 +154,7 @@ class UserController < ApplicationController
         if params[:r]
             redirect_to params[:r]
         else
-            redirect_to :controller => "general", :action => "frontpage"
+            redirect_to :controller => "general", :action => "index"
         end
     end
 
