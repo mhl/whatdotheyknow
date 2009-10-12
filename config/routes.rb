@@ -7,13 +7,7 @@
 # $Id: routes.rb,v 1.89 2009-07-01 11:07:19 francis Exp $
 
 ActionController::Routing::Routes.draw do |map|
-
-
   map.bodies_by_category "/bodies/by_category/:category", :controller => "public_bodies", :action => "by_category"
-  map.list_requests "/requests/:status", :requirements => {:status => /[a-z]+/}, :controller => :requests, :status => "successful"
-  map.resources :public_bodies, :as => "bodies", :shallow => true, :member => {:view_email => [:get, :post]} do |public_body|
-    public_body.resources :info_requests, :as => "requests"
-  end
   map.resources :help, :collection => {:about => :get}, :only => []
 
     # The priority is based upon order of creation: first created -> highest priority.
@@ -41,18 +35,18 @@ ActionController::Routing::Routes.draw do |map|
         request.new_request    '/new',         :action => 'new'
         request.new_request_to_body    '/new/:public_body_id',         :action => 'new'
 
-        request.show_request     '/request/:url_title', :action => 'show'
-        request.similar_request     '/similar/request/:url_title', :action => 'similar'
+        request.show_request     '/requests/:url_title', :action => 'show'
+        request.similar_request     '/requests/:url_title/similar', :action => 'similar'
 
-        request.describe_state   '/request/:id/describe', :action => 'describe_state'
-        request.show_response_no_followup    '/request/:id/response', :action => 'show_response'
-        request.show_response    '/request/:id/response/:incoming_message_id', :action => 'show_response'
-        request.get_attachment_as_html   '/request/:id/response/:incoming_message_id/attach/html/:part/*file_name', :action => 'get_attachment_as_html'
-        request.get_attachment   '/request/:id/response/:incoming_message_id/attach/:part/*file_name', :action => 'get_attachment'
+        request.describe_state   '/requests/:id/describe', :action => 'describe_state'
+        request.show_response_no_followup    '/requests/:id/response', :action => 'show_response'
+        request.show_response    '/requests/:id/response/:incoming_message_id', :action => 'show_response'
+        request.get_attachment_as_html   '/requests/:id/response/:incoming_message_id/attach/html/:part/*file_name', :action => 'get_attachment_as_html'
+        request.get_attachment   '/requests/:id/response/:incoming_message_id/attach/:part/*file_name', :action => 'get_attachment'
 
         request.info_request_event '/request_event/:info_request_event_id', :action => 'show_request_event'
 
-        request.upload_response "/upload/request/:url_title", :action => 'upload_response'
+        request.upload_response "/requests/:url_title/upload", :action => 'upload_response'
     end
 
     map.with_options :controller => 'user' do |user|
@@ -67,22 +61,22 @@ ActionController::Routing::Routes.draw do |map|
     end
 
     map.with_options :controller => 'public_body' do |body|
-        body.list_public_bodies "/body", :action => 'list'
-        body.list_public_bodies "/body/list/:tag", :action => 'list'
-        body.show_public_body "/body/:url_name", :action => 'show'
-        body.view_public_body_email "/body/:url_name/view_email", :action => 'view_email'
+        body.list_public_bodies "/bodies", :action => 'list'
+        body.list_public_bodies "/bodies/list/:tag", :action => 'list'
+        body.show_public_body "/bodies/:url_name", :action => 'show'
+        body.view_public_body_email "/bodies/:url_name/view_email", :action => 'view_email'
     end
 
     map.with_options :controller => 'comment' do |comment|
-        comment.new_comment "/annotate/request/:url_title", :action => 'new', :type => 'request'
+        comment.new_comment "/annotate/requests/:url_title", :action => 'new', :type => 'request'
     end
 
     map.with_options :controller => 'track' do |track|
         # /track/ is for setting up an email alert for the item
         # /feed/ is a direct RSS feed of the item
-        track.track_request '/:feed/request/:url_title', :action => 'track_request', :feed => /(track|feed)/
+        track.track_request '/:feed/requests/:url_title', :action => 'track_request', :feed => /(track|feed)/
         track.track_list '/:feed/list/:view', :action => 'track_list', :view => nil, :feed => /(track|feed)/
-        track.track_public_body "/:feed/body/:url_name", :action => 'track_public_body', :feed => /(track|feed)/
+        track.track_public_body "/:feed/bodies/:url_name", :action => 'track_public_body', :feed => /(track|feed)/
         track.track_user "/:feed/user/:url_name", :action => 'track_user', :feed => /(track|feed)/
         # XXX must be better way of getting dots and slashes in search queries to work than this *query_array
         track.track_search "/:feed/search/*query_array", :action => 'track_search_query' , :feed => /(track|feed)/
@@ -114,7 +108,7 @@ ActionController::Routing::Routes.draw do |map|
     map.connect '/admin/stats', :controller => 'admin_general', :action => 'stats'
     map.connect '/admin/missing_scheme', :controller => 'admin_public_body', :action => 'missing_scheme'
     map.connect '/admin/unclassified', :controller => 'admin_request', :action => 'list_old_unclassified'
-    map.connect '/admin/body/:action/:id', :controller => 'admin_public_body'
+    map.connect '/admin/bodies/:action/:id', :controller => 'admin_public_body'
     map.connect '/admin/request/:action/:id', :controller => 'admin_request'
     map.connect '/admin/user/:action/:id', :controller => 'admin_user'
     map.connect '/admin/track/:action/:id', :controller => 'admin_track'
