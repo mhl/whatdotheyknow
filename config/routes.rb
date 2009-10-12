@@ -7,6 +7,8 @@
 # $Id: routes.rb,v 1.89 2009-07-01 11:07:19 francis Exp $
 
 ActionController::Routing::Routes.draw do |map|
+
+
   map.bodies_by_category "/bodies/by_category/:category", :controller => "public_bodies", :action => "by_category"
   map.list_requests "/requests/:status", :requirements => {:status => /[a-z]+/}, :controller => :requests, :status => "successful"
   map.resources :public_bodies, :as => "bodies", :shallow => true, :member => {:view_email => [:get, :post]} do |public_body|
@@ -136,5 +138,6 @@ ActionController::Routing::Routes.draw do |map|
     #map.connect ':controller/:action/:id.:format'
     #map.connect ':controller/:action/:id'
     # map.connect '/:controller/:action'
+    map.root :controller => :general
 end
 
