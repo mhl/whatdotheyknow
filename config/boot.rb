@@ -1,16 +1,6 @@
 # Don't change this file!
 # Configure your app in config/environment.rb and config/environments/*.rb
 
-# Hmmm, that's a bit daft - 'production' needs setting not only in the web
-# server, it also needs setting in all the scripts, so a central place seems
-# better. Look for a config/rails_env file, and read stuff from there if 
-# it exists. Put just a line like this in there:
-#   ENV['RAILS_ENV'] = 'production'
-rails_env_file = File.join(File.dirname(__FILE__), 'rails_env.rb')
-if File.exists?(rails_env_file)
-    require rails_env_file
-end
-
 RAILS_ROOT = "#{File.dirname(__FILE__)}/.." unless defined?(RAILS_ROOT)
 
 module Rails
@@ -54,6 +44,7 @@ module Rails
     def load_initializer
       require "#{RAILS_ROOT}/vendor/rails/railties/lib/initializer"
       Rails::Initializer.run(:install_gem_spec_stubs)
+      Rails::GemDependency.add_frozen_gem_path
     end
   end
 
@@ -77,7 +68,7 @@ module Rails
 
     class << self
       def rubygems_version
-        Gem::RubyGemsVersion if defined? Gem::RubyGemsVersion
+        Gem::RubyGemsVersion rescue nil
       end
 
       def gem_version
@@ -91,15 +82,15 @@ module Rails
       end
 
       def load_rubygems
+        min_version = '1.3.2'
         require 'rubygems'
-
-        unless rubygems_version >= '0.9.4'
-          $stderr.puts %(Rails requires RubyGems >= 0.9.4 (you have #{rubygems_version}). Please `gem update --system` and try again.)
+        unless rubygems_version >= min_version
+          $stderr.puts %Q(Rails requires RubyGems >= #{min_version} (you have #{rubygems_version}). Please `gem update --system` and try again.)
           exit 1
         end
 
       rescue LoadError
-        $stderr.puts %(Rails requires RubyGems >= 0.9.4. Please install RubyGems and try again: http://rubygems.rubyforge.org)
+        $stderr.puts %Q(Rails requires RubyGems >= #{min_version}. Please install RubyGems and try again: http://rubygems.rubyforge.org)
         exit 1
       end
 

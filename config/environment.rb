@@ -61,8 +61,14 @@ Rails::Initializer.run do |config|
   config.active_record.default_timezone = :utc
   
   # See Rails::Configuration for more options
-  ENV['RECAPTCHA_PUBLIC_KEY'] = MySociety::Config::get("RECAPTCHA_PUBLIC_KEY", 'x');
-  ENV['RECAPTCHA_PRIVATE_KEY'] = MySociety::Config::get("RECAPTCHA_PRIVATE_KEY", 'x');
+  ENV['RECAPTCHA_PUBLIC_KEY'] = MySociety::Config::get("RECAPTCHA_PUBLIC_KEY", 'x')
+  ENV['RECAPTCHA_PRIVATE_KEY'] = MySociety::Config::get("RECAPTCHA_PRIVATE_KEY", 'x')
+
+  config.gem "haml"
+
+  config.gem "rspec", :lib => false, :version => ">= 1.2.0"
+  config.gem "rspec-rails", :lib => false, :version => ">= 1.2.0"
+
 end
 
 # Add new inflection rules using the following format 
