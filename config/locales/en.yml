@@ -2,6 +2,14 @@
 # See http://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
 
 en:
+  default:
+    title: "WhatDoTheyKnow - file and browse Freedom of Information (FOI) requests"
+    short_title: "WhatDoTheyKnow"
+    tag_line: "Make and explore Freedom of Information requests"
+    site_by: "a site by mysociety.org"
+    site_by_url: "http://www.mysociety.org"
+    contact: "Contact WhatDoTheyKnow"
+    made_by: "mySociety"
   frontpage:
     header: "Make or explore Freedom of Information requests"
     body_name: "name of the UK public authority"

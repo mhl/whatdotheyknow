@@ -1,0 +1,72 @@
+!!!
+%html{ :lang => "en-gb" }
+  %head
+    /
+      <haml:loud> javascript_include_tag :defaults </haml:loud>
+    %script{ :src => "/jslib/spell/spellChecker.js", :type => "text/javascript" }
+    %title
+      - if @title
+        = @title
+        \- WhatDoTheyKnow
+      - else
+        =t "default.title"
+    = stylesheet_link_tag 'main', :title => "Main", :rel => "stylesheet"
+    = stylesheet_link_tag 'yucky-green', :title => "Yucky Green", :rel => "alternate stylesheet"
+    /
+      [if LT IE 7]>
+      <style type="text/css">@import url("/stylesheets/ie6.css");</style>
+      <![endif]
+    - if @feed_autodetect
+      - for feed in @feed_autodetect
+        %link{ :href => h(feed[:url]), :title => h(feed[:title]), :rel => "alternate", :type => "application/atom+xml" }
+    - if @no_crawl
+      %meta{ :name => "robots", :content => "noindex, nofollow" }
+  %body
+    #banner
+    #header
+      %h1=link_to t("default.short_title"), "/"
+      #tagline=t "default.tag_line"
+        
+    #mysoclogo=link_to t("default.site_by"), t("default.site_by_url")
+        
+    #navigation_search
+      - form_tag({:controller => "general", :action => "search_redirect"}, {:id => "navigation_search_form"}) do
+        %p
+          = text_field_tag 'query', params[:query], { :size => 40, :id => "navigation_search_query" }
+          = submit_tag "Search"
+    #topnav
+      %ul#navigation
+        %li=link_to "Make request", root_path
+        %li= link_to "View requests", request_list_url(:view => 'successful')
+        %li= link_to "View authorities", list_public_bodies_default
+        - if @user
+          %li= link_to "My requests", user_url(@user)
+        %li= link_to "Help", about_url
+      - if not (controller.action_name == 'signin' or controller.action_name == 'signup')
+        #logged_in_bar
+          - if @user
+            ="Hello, #{h @user.name}!"
+            (
+            = link_to "Sign out", signout_url(:r => request.request_uri)
+            )
+          - else
+            Hello! (
+            = link_to "Sign in or sign up", signin_url(:r => request.request_uri)
+            )
+    #wrapper
+      #content
+        - if flash[:notice]
+          #notice
+            = flash[:notice]
+        - if flash[:error]
+          #error
+            = flash[:error]
+        %div{ :id => "#{controller.controller_name}_#{controller.action_name}" }
+          = yield :layout
+    #footer
+      =link_to t("default.contact"), "/help/contact"
+      |
+      Built by
+      =link_to t("default.made_by"), t("default.site_by_url")
+      \...
+      =link_to "and you", "/help/about#helpus"
