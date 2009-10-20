@@ -1,17 +1,15 @@
 #frontpage_search
-  %h1
-    Make or explore Freedom of Information requests
+  %h1=t "frontpage.header"
   - form_tag({:action => "search_redirect"}, {:id => "search_form"}) do
     %p
       First, type in the
-      %strong name of the UK public authority
+      %strong=t "frontpage.body_name"
       you'd
       %br
       like information from.
       %strong By law, they have to respond
       (
-      %a{ :href => "/help/about" }
-        why?
+      =link_to "why?", "/help/about"
       ).
       %br
       %br
@@ -20,11 +18,7 @@
       = submit_tag "Search"
       %br
       e.g.
-      = link_to 'Liverpool', search_url('liverpool', 'bodies')
-      ,
-      = link_to 'MRSA', search_url('mrsa', 'bodies')
-      ,
-      = link_to 'Treasury', search_url('treasury', 'bodies')
+      =@popular_bodies[0..2].inject([]){|result, body| result << public_body_link(body)}.join(", ")
       %br
       %br
       OR,
