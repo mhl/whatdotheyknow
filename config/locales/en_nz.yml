@@ -2,6 +2,4 @@
 # See http://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
 
 en:
-  frontpage:
-    header: "Make or explore Freedom of Information requests"
-    body_name: "name of the UK public authority"
+  hello: "Hello world"

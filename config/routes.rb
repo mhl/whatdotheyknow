@@ -109,7 +109,7 @@ ActionController::Routing::Routes.draw do |map|
     map.connect '/admin/missing_scheme', :controller => 'admin_public_body', :action => 'missing_scheme'
     map.connect '/admin/unclassified', :controller => 'admin_request', :action => 'list_old_unclassified'
     map.connect '/admin/bodies/:action/:id', :controller => 'admin_public_body'
-    map.connect '/admin/request/:action/:id', :controller => 'admin_request'
+    map.connect '/admin/requests/:action/:id', :controller => 'admin_request'
     map.connect '/admin/user/:action/:id', :controller => 'admin_user'
     map.connect '/admin/track/:action/:id', :controller => 'admin_track'
     map.connect '/admin/censor/:action/:id', :controller => 'admin_censor_rule'
