@@ -13,6 +13,7 @@ class ApplicationController < ActionController::Base
     # Standard headers, footers and navigation for whole site
     layout "default"
 
+    before_filter :set_user_language
     # Set cookie expiry according to "remember me" checkbox, as per "An easier
     # and more flexible hack" on this page:
     #   http://wiki.rubyonrails.org/rails/pages/HowtoChangeSessionOptions
@@ -236,4 +237,7 @@ class ApplicationController < ActionController::Base
     # all of all.
     include LinkToHelper
 
+    def set_user_language
+      I18n.locale = "en_nz"
+    end
 end

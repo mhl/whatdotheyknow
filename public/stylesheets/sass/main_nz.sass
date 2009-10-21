@@ -1,0 +1,947 @@
+body
+  padding: 0px
+  margin: 0px
+  text-align: center
+  font-family: Tahoma, Geneva, sans-serif
+
+
+#banner
+  position: absolute
+  top: 0px
+  left: 0px
+  width: 100%
+  margin: 0px
+  background-color: #F0F0F0
+  border-color: #993233
+  border-width: 0 0 3px 0
+  border-style: solid
+  height: 100px
+  background-image: url(/images/fyi_banner.png)
+  background-repeat: no-repeat
+  background-position: center top
+
+
+#header
+  height: 55px
+  position: absolute
+  top: 0px
+  left: 14px
+  height: 55px
+  width: 500px
+  z-index: 150
+  text-align: left
+
+  h1
+    font-size: 0.8em
+    line-height: 0em
+
+    a
+      color: #f0f0f0
+      display: block
+      height: 55px
+      background-image: url(/images/fyi.png)
+      background-repeat: no-repeat
+
+  #tagline
+    font-size: 0.8em
+    font-style: italic
+    text-align: left
+    margin: 2px 0 0 0
+    color: #626262
+
+
+#staging, #alpha_notice, #beta
+
+#header h1 #beta
+  display: inline
+  height: 1em
+  background-image: none
+  font-size: 12px
+  color: #A4A4A4
+
+  a
+    display: inline
+    height: 1em
+    background-image: none
+    font-size: 12px
+    color: #A4A4A4
+
+
+#staging
+  visibility: hidden
+  overflow: default
+
+
+#alpha_notice
+  padding: 0 20px 0 20px
+  margin: 0 0 1em 0
+  border-color: #FF201D
+  border-width: 1px
+  border-style: solid
+  background-color: #f0f0f0
+
+
+#mysoclogo
+  position: absolute
+  width: 100%
+  left: 0px
+  top: 0px
+  z-index: 150
+  text-align: right
+  font-size: 0.8em
+  height: 40px
+  z-index: 100
+
+  a
+    color: #f0f0f0
+    display: block
+    float: right
+    clear: none
+    height: 55px
+    width: 265px
+    background-image: none
+    background-repeat: no-repeat
+    background-position: 125px 15px
+
+
+#navigation_search
+  position: absolute
+  width: 100%
+  left: 0px
+  top: 70px
+  z-index: 150
+  text-align: right
+  -moz-opacity: 0.7!important
+  filter: alpha(opacity= 70)!important
+  opacity: 0.7!important
+
+  input
+    border-color: #010101
+    border-width: 1px
+    border-style: solid
+    background-color: #fff
+    color: #000
+
+    &#navigation_search_query
+      width: 12em
+
+  p
+    margin: 0 0.6em 0 0
+
+
+#topnav
+  position: relative
+  top: 103px
+  left: 0px
+  width: 100%
+  height: auto
+  overflow: auto
+  padding: 0px 0px 0px 0px
+  z-index: 100
+  background-color: #000
+  font-size: 0.9em
+
+  ul
+    list-style: none
+    margin: 0px
+    padding: 0px
+
+  li
+    float: left
+
+    a
+      display: block
+      margin: 0px
+      padding: 0.15em 0.6em 0.25em 0.8em
+      color: #ADADAD
+      text-decoration: none
+
+      &:visited
+        display: block
+        margin: 0px
+        padding: 0.15em 0.6em 0.25em 0.8em
+        color: #ADADAD
+        text-decoration: none
+
+      &:hover
+        color: #fff
+
+      &:active
+      &.on
+        font-weight: bold
+        color: #000
+
+        &:visited
+          font-weight: bold
+          color: #000
+
+        &:hover, &:active
+
+#logged_in_bar
+  float: right
+  clear: none
+  font-size: 0.9em
+  z-index: 200
+  padding: 0.20em 10px 0.25em 1em
+  color: #FFF
+
+  a
+    color: #92B3FF
+
+    &:visited
+      color: #92B3FF
+
+
+#wrapper
+  position: relative
+  clear: both
+  top: 0px
+  padding-top: 100px
+  margin: 0px auto 1.2em auto
+  width: 53em
+  text-align: left
+  overflow: visible
+
+
+#content
+  position: relative
+  padding: 1em 1em 1em 1em
+
+
+h1, h2, h3
+  font-family: Trebuchet, Trebuchet MS, Helvetica, sans-serif
+  font-weight: bold
+  line-height: 1em
+  letter-spacing: 0em
+  color: #555
+
+
+h1
+  font-size: 1.8em
+
+
+h2
+  font-size: 1.4em
+
+
+h3
+  font-size: 1.2em
+
+
+h4, h5, h6
+
+.highlight
+  background-color: #F0F0F0
+  border-color: #A3A3A3
+  border-width: 1px
+  border-style: dotted
+
+
+dl
+  line-height: 1.2em
+
+
+dt
+  font-weight: bold
+
+
+dd
+  margin: 0.6em 0 2em 4em
+  width: 33em
+
+
+#frontpage_search
+  text-align: center
+  margin: 3em 0em 1em 0em
+  padding: 1em
+  background-color: #d0d0d0
+
+
+#stepwise_instructions
+  text-align: center
+  margin: 0em 0em 0em 0em
+  padding: 0.2em 0em 0.2em 0em
+  background-color: #d0d0d0
+
+  p
+    margin: 0.5em 0em 0em 0em
+    padding: 0em 0em 0em 0em
+
+
+#stepwise_make_request
+  text-align: center
+  margin: 0em 14em 0em 0em
+  padding: 1em 1em 1em 1em
+  background-color: #d0d0d0
+
+
+#stepwise_make_request_view_email
+  text-align: center
+  margin: 0em 0em 0em 0em
+  padding: 1em 0em 1em 0em
+  background-color: #d0d0d0
+
+
+#frontpage_examples
+  div
+    &#examples_0
+      float: left
+      margin-left: 0%
+      width: 49%
+
+    &#examples_1
+      float: right
+      margin-right: 0%
+      width: 49%
+
+  p, h2
+    text-align: center
+    clear: both
+
+  li
+  ul
+    margin: 0 0 0 0
+    padding: 1em 0em 1em 0em
+    text-align: center
+    list-style: none
+
+
+#list_sidebar
+  width: 10em
+  float: right
+  font-size: 0.85em
+  border-color: #AEAEAE
+  border-width: 1px
+  border-style: solid
+  background-color: #EAEAEA
+  padding: 0.25em
+  margin: 0 0 0 1em
+
+  h1, h2
+    font-size: 1.2em
+    line-height: 1em
+    margin: 0px 0px 0.3em 0px
+
+  ul
+    list-style: none
+    margin: 0px
+    padding: 0px
+
+
+#request_sidebar
+  span.head
+    padding: 12px 0 0 0
+    font-weight: bold
+    font-size: 1.2em
+    padding: 8px 0 0 0px
+    background-image: none
+
+  .request_listing span.desc
+    float: left
+    clear: both
+    width: 12.9em
+    background-image: url(../images/navimg/quote-open-small.png)
+    background-repeat: no-repeat
+    background-position: 0 0
+    padding: 2px 2px 1em 15px
+
+  span.bottomline
+    float: left
+    clear: both
+    width: 100%
+    margin: 0 0 0.6em 0
+    background-image: none
+    padding: 0px
+
+
+.request_listing, .body_listing, .user_listing
+  font-size: 0.8em
+  margin-top: 1.5em
+  padding: 0 0 1.5em 0
+  border-bottom: #9C9C9C
+  border-width: 0 0 1px 0
+  border-style: none none solid none
+  overflow: hidden
+
+
+.body_listing
+  _width: 45em
+
+
+.request_listing a, .body_listing a, .user_listing a
+  text-decoration: none
+
+
+span.head
+  display: block
+  font-size: 1.4em
+  padding: 12px 0 0 0
+  font-weight: bold
+
+
+.request_listing span.head
+  min-height: 32px
+  margin: 0 0 0.3em 0
+  padding: 8px 0 0 42px
+  background-image: url(../images/navimg/request-icon.png)
+  background-repeat: no-repeat
+  background-position: 4px 0px
+
+
+.body_listing span.head
+  min-height: 32px
+  margin: 0 0 0.3em 0
+  padding: 8px 0 0 42px
+  background-image: url(../images/navimg/auth-icon.png)
+  background-repeat: no-repeat
+  background-position: 4px 0px
+
+
+.user_listing span.head
+  min-height: 32px
+  margin: 0 0 0.3em 0
+  padding: 8px 0 0 42px
+  background-image: url(../images/navimg/user-icon.png)
+  background-repeat: no-repeat
+  background-position: 4px 0px
+
+
+span.bottomline
+  clear: left
+  display: block
+  padding: 10px 0 0 42px
+
+
+.request_listing span.bottomline
+  width: 33em
+  margin: 0 0 0.6em 0
+  background-repeat: no-repeat
+  background-position: left center
+  min-height: 42px
+
+
+span.bottomline a
+
+.request_icon_line
+  background-repeat: no-repeat
+  background-position: left center
+  min-height: 24px
+  padding: 8px 0 10px 42px
+
+
+.icon_waiting_response, .icon_waiting_classification, .icon_waiting_clarification
+  background-image: url(../images/navimg/status-icons-wait.png)
+
+
+.icon_rejected
+  background-image: url(../images/navimg/status-icons-fail.png)
+
+
+.icon_not_held
+  background-image: url(../images/navimg/status-icons-not-held.png)
+
+
+.icon_successful, .icon_partially_successful
+  background-image: url(../images/navimg/status-icons-succeed.png)
+
+
+.icon_requires_admin, .icon_waiting_response_overdue
+  background-image: url(../images/navimg/status-icons-attn.png)
+
+
+.icon_gone_postal
+  background-image: url(../images/navimg/status-icons-post.png)
+
+
+.icon_error_message
+  background-image: url(../images/navimg/status-icons-error-message.png)
+
+
+.icon_internal_review
+  background-image: url(../images/navimg/status-icons-internal-review.png)
+
+
+.icon_user_withdrawn
+  background-image: url(../images/navimg/status-icons-user-withdrawn.png)
+
+
+span.desc
+  display: block
+  float: right
+  clear: none
+  font-style: italic
+  color: #3F3F3F
+  overflow: hidden
+
+
+.request_listing span.desc
+  width: 23em
+  background-image: url(../images/navimg/quote-open.png)
+  background-repeat: no-repeat
+  background-position: 0 0
+  padding: 8px 0 0 25px
+
+
+.body_listing span.desc
+  background-image: none
+  float: left
+  clear: both
+  padding: 0px 0 0 42px
+
+
+div.pagination
+  text-align: center
+  padding-top: 0.3em
+
+  span.current
+    padding: 0 0.6em 0.1em 0.6em
+    background-color: #000
+    color: #FFF
+
+
+span.disabled
+  color: #B2B2B2
+  padding: 0 0.6em 0.1em 0.6em
+
+
+div.pagination a
+  text-decoration: none
+  padding: 0 0.6em 0.1em 0.6em
+
+  &:visited
+    text-decoration: none
+    padding: 0 0.6em 0.1em 0.6em
+
+  &:hover
+    background-color: #626262
+    color: #FFF
+
+
+#make_requests
+  float: left
+  clear: none
+  width: 26em
+  text-align: center
+
+
+.auto_complete
+  text-align: left
+  background-color: #FFF
+  border-color: #454545 #282828 #000 #454545
+  border-width: 1px 1px 2px 1px
+  border-style: solid
+
+  ul
+    list-style: none
+    margin: 0px
+    padding: 0px
+
+    li
+      margin: 0px 0px 0.4em 0px
+      padding: 0.1em 1em 0.3em 1em
+      color: #595959
+
+      &:hover
+        color: #000
+        background-color: #D7D7D7
+        cursor: default
+
+
+#error, .errorExplanation, #hidden_request
+  color: #FF0606
+  font-size: 1.4em
+  font-weight: bold
+  border-color: #FF0C11
+  border-width: 1px
+  border-style: solid
+  background-color: #ffeeee
+
+
+#error, #hidden_request
+  padding: 0.5em
+
+
+.fieldWithErrors
+  display: block
+  padding: 0.2em
+  border-color: #FF0C11
+  border-width: 1px
+  border-style: solid
+  background-color: #ffeeee
+
+
+#notice, .describe_state_form, .undescribed_requests, .gone_postal_help
+  color: #16C132
+  font-size: 1.4em
+  font-weight: bold
+  border-color: #1EFF38
+  border-width: 1px
+  border-style: solid
+  background-color: #D5FFD8
+  padding: 0.5em
+
+
+.form_explanation
+  font-size: 0.8em
+
+
+.describe_state_form, .undescribed_requests, .gone_postal_help
+  font-weight: normal
+  margin-bottom: 1em
+  font-size: 1.0em
+  color: #454545
+  float: left
+  width: 37em
+
+
+.undescribed_requests
+  clear: both
+
+
+.requires_admin_details
+  margin-left: 1.8em
+  width: 35em
+
+
+.single_user
+  clear: left
+
+
+#request_sidebar
+  float: right
+  clear: none
+  width: 12em
+  margin: 0 0 0 0.6em
+  font-size: 0.9em
+
+
+#request_main, #show_response_view
+  width: 35em
+
+
+#preview_form p
+  clear: both
+
+
+div.correspondence
+  width: 37em
+  float: left
+  padding: 0em 0.5em 0em 0.5em
+  margin: 0 0 1em 0
+  border-color: #5F5F5F
+  border-width: 1px
+  border-style: solid
+  overflow: auto
+
+  h2
+    text-align: right
+    font-size: 1em
+
+
+.event_actions
+  text-align: right
+
+
+div
+  &.comment_in_request
+    width: 37em
+    float: left
+    padding: 0em 0.5em 0em 0.5em
+    margin: 0 0 1em 0
+    border-color: #5F5F5F
+    border-width: 1px
+    border-style: dotted
+    overflow: auto
+
+  &#after_actions
+    float: left
+    margin-bottom: 1em
+    width: 37em
+
+  &#anyone_actions
+    margin-bottom: 1em
+
+  &[id|="outgoing"] p
+    font-size: 0.95em
+
+  &[id|="incoming"]
+    background-color: #E7E7E7
+    font-family: Times New Roman, Times, serif
+
+    p
+      font-size: 1.08em
+
+  &[id|="comment"]
+    margin-left: 2em
+    width: 35em
+
+    p
+      font-size: 0.8em
+
+    h2
+      font-size: 0.8em
+      text-align: left
+      margin-left: 1em
+
+
+.comment_quote
+  float: left
+  margin-right: 0.6em
+
+
+.correspondence_text, .comment_in_request_text
+  margin: 0 1.2em 0 0.8em
+
+
+.preview_subject
+  margin: 1em 1.2em 0 0.8em
+
+
+.attachments
+  border-color: #010101
+  border-width: 1px
+  margin: 0 0 1em 0
+
+
+.attachment
+  clear: both
+
+
+a img.attachment_image
+  float: left
+  border: 0px
+  vertical-align: middle
+  margin: 0 0.2em 0.2em 0
+
+
+.attachments hr
+  &.top
+    margin: 0 0 1em 0
+    clear: both
+
+  &.bottom
+    margin: 1em 0 0 0
+    clear: both
+
+
+#followup
+  clear: both
+  float: left
+
+
+.view_html_content
+  margin-left: 1em
+  margin-right: 1em
+  max-width: 50em
+
+
+img
+  max-width: 50em
+
+
+.view_html_download_link
+  float: right
+
+
+.view_html_prefix
+  text-align: left
+  background-color: #E7E7E7
+  border-bottom: 1px solid #5f5f5f
+  padding: 0.5em 1em 0.5em 1em
+
+
+#body_sidebar
+  font-size: 0.85em
+  width: 16em
+  float: right
+  clear: none
+
+  a
+    text-decoration: none
+
+
+#request_advice ul
+  width: 26em
+  margin: 0 auto 0 auto
+
+  li
+    margin: 0 0 1em 0
+
+
+#request_form
+  margin-top: 4em
+
+  label
+    display: block
+    width: 8em
+    float: left
+    clear: none
+    text-align: right
+    padding: 0 10px 0 0
+    margin: 0 0 0 0
+
+
+label.form_label
+  display: block
+  width: 8em
+  float: left
+  clear: none
+  text-align: right
+  padding: 0 10px 0 0
+  margin: 0 0 0 0
+
+
+#request_form h1 label
+  font-size: 0.55em
+
+
+.form_item_note, .form_note
+  font-size: 0.8em
+  width: 34em
+  margin-left: 11em
+
+
+.form_item_note
+  margin-top: -1.0em
+
+
+.form_button
+  margin: 0 0 0 9em
+
+
+p#sign_in_reason
+  text-align: center
+  font-size: 1.4em
+  font-weight: bold
+  line-height: 1em
+
+
+#signup, #signin
+  clear: none
+  width: 23em
+  margin-bottom: 1em
+
+
+#signup h2, #signin h2
+  font-size: 1.1em
+
+
+#signup
+  float: right
+
+
+#signin
+  float: left
+
+
+#sign_alone #signin
+  margin-left: 25%
+
+
+#signup .form_item_note, #signin .form_note
+  font-size: 0.8em
+  width: 16em
+  margin-left: 11em
+
+
+div
+  &#about_sidebar
+    float: right
+    clear: none
+    width: 12em
+    margin: 0 0 0 1em
+
+  &#help_about
+    dt a, h1 a
+      text-decoration: none
+      font-size: 0.80em
+      color: #fff
+      background-color: #fff
+
+  &#help_unhappy h1 a.hover_a
+    text-decoration: none
+    font-size: 0.80em
+    color: #fff
+    background-color: #fff
+
+  &#help_about
+    dt:hover > a, h1:hover > a
+      color: #0000ee
+
+  &#help_unhappy h1:hover > a.hover_a
+    color: #0000ee
+
+  &#help_about
+    dt:hover > a:hover, h1:hover > a:hover
+      text-decoration: underline
+
+  &#help_unhappy h1:hover > a.hover_a:hover
+    text-decoration: underline
+
+
+#contact_preamble
+  width: 33em
+  margin-left: 8em
+
+
+div
+  &.feed_link img
+    border: none
+    vertical-align: middle
+    text-decoration: none
+
+  &.feed_link_main
+    display: inline
+
+
+form.feed_form_main
+  display: inline
+
+
+div.act_link img
+  background-color: red
+  border: none
+  vertical-align: middle
+  text-decoration: none
+
+
+#footer
+  position: relative
+  clear: both
+  float: left
+  width: 100%
+  height: 2em
+  margin: 0px 0 0px 0
+  padding: 0.5em 0 0.5em 0
+  font-size: 0.85em
+  background-color: #F0F0F0
+  border-color: #993233
+  border-width: 3px 0 0 0
+  border-style: solid
+
+
+#everypage
+  background-color: #ffcc99
+  border: solid 2px #ff6600
+  border-top: none
+  opacity: 0.97
+  -moz-border-radius-bottomleft: 10px
+  -moz-border-radius-bottomright: 10px
+  padding: 4px
+  position: fixed
+  width: 70%
+  left: 15%
+  z-index: 200
+  max-height: 95%
+  overflow: auto
+
+  h2, h3
+    margin: 0.5em 0
+
+
+#foi2009
+  h2, h3
+    margin: 0.5em 0
+
+
+#game_buttons

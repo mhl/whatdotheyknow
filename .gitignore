@@ -7,3 +7,4 @@ log/*.log
 *sqlite3
 config/database.yml
 *~
+public/stylesheets/main_nz.css

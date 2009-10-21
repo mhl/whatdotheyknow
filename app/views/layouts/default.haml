@@ -10,7 +10,7 @@
         \- WhatDoTheyKnow
       - else
         =t "default.title"
-    = stylesheet_link_tag 'main', :title => "Main", :rel => "stylesheet"
+    = stylesheet_link_tag t("default.css"), :title => "Main", :rel => "stylesheet"
     = stylesheet_link_tag 'yucky-green', :title => "Yucky Green", :rel => "alternate stylesheet"
     /
       [if LT IE 7]>
@@ -24,7 +24,7 @@
   %body
     #banner
     #header
-      %h1=link_to t("default.short_title"), "/"
+      %h1=link_to "", "/"
       #tagline=t "default.tag_line"
         
     #mysoclogo=link_to t("default.site_by"), t("default.site_by_url")

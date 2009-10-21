@@ -3,6 +3,7 @@
 
 en:
   default:
+    css: "main.css"
     title: "WhatDoTheyKnow - file and browse Freedom of Information (FOI) requests"
     short_title: "WhatDoTheyKnow"
     tag_line: "Make and explore Freedom of Information requests"
