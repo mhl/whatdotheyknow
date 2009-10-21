@@ -1,0 +1,18 @@
+Used tagging plugin acts_as_taggable_on from http://github.com/mbleigh/acts-as-taggable-on
+ * TagList.delimiter spaces
+ * remove all uses of public_body_tags
+
+
+general is not a resource, so should not use restful resource style url
+removed request_controller_spec
+removed views/request/show.rhtml_spec
+ignore info_requests_count for versioning of public_body
+fixed post_redirect to generate tokens (it wasn't when it should)
+
+Changes
+Commented out environment.rb - error_messages
+fixed view_public_body_email_url to use new restful 
+Use ActionMailer::Base.default_url_options[:host] in new rails
+No need for ActionView::TemplateFinder in rails 2.3
+http://github.com/jeremydurham/custom-err-msg update custom_err_msg for rails 2.3.4
+add :type => view for outgoing_message_spec, so that can assert_select

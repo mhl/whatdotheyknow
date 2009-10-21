@@ -33,6 +33,8 @@ require 'set'
 
 class PublicBody < ActiveRecord::Base
     strip_attributes!
+    
+    acts_as_taggable_on :tags   
 
     validates_presence_of :name
     validates_presence_of :url_name
@@ -41,7 +43,7 @@ class PublicBody < ActiveRecord::Base
     validates_uniqueness_of :name
     
     has_many :info_requests, :order => 'created_at desc'
-    has_many :public_body_tags
+#    has_many :public_body_tags
     has_many :track_things, :order => 'created_at desc'
 
     def self.categories_with_headings
@@ -252,44 +254,35 @@ class PublicBody < ActiveRecord::Base
 
     # Given an input string of tags, sets all tags to that string
     def tag_string=(tag_string)
-        tags = tag_string.split(/\s+/).uniq
-
-        ActiveRecord::Base.transaction do
-            for public_body_tag in self.public_body_tags
-                public_body_tag.destroy
-            end
-            for tag in tags
-                public_body_tag = PublicBodyTag.new(:name => tag)
-                self.public_body_tags << public_body_tag
-                public_body_tag.public_body = self
-            end
-        end
+        self.tag_list = tag_string
     end
+    
+    #Re-Using old facade
     def tag_string
-        return self.public_body_tags.map { |t| t.name }.join(' ')
+        tag_list.to_s
     end
+    
+    #Re-Using old facade
     def has_tag?(tag)
-        for public_body_tag in self.public_body_tags
-            if public_body_tag.name == tag
-                return true
-            end
-        end 
-        return false
+        tags.include?(tag)
     end
+    
+    #Re-Using old facade    
     def add_tag_if_not_already_present(tag)
-        self.tag_string = self.tag_string + " " + tag
+        self.tag_list = self.tag_list + " " + tag
     end
 
+    #Re-Using old facade
     # Find all public bodies with a particular tag
-    def self.find_by_tag(tag) 
-        return PublicBodyTag.find(:all, :conditions => ['name = ?', tag] ).map { |t| t.public_body }.sort { |a,b| a.name <=> b.name }
+    def self.find_by_tag(tag)
+        self.tagged_with(tag, :on => :tags).find(:all, :order => :name) 
     end
 
     # Use tags to describe what type of thing this is
     def type_of_authority(html = false)
         types = []
         first = true
-        for tag in self.public_body_tags
+        for tag in self.tags
             if PublicBody.categories_by_tag.include?(tag.name)
                 desc = PublicBody.category_singular_by_tag[tag.name] 
                 if first

@@ -64,24 +64,33 @@ class PublicBodyController < ApplicationController
 
     def list
         @tag = params[:tag]
+        
+        # FIXME untangle this unholy mess
         if @tag.nil?
             @tag = "all"
-            conditions = []
-        elsif @tag == 'other'
-            category_list = PublicBody.categories.map{|c| "'"+c+"'"}.join(",")
-            conditions = ['(select count(*) from public_body_tags where public_body_tags.public_body_id = public_bodies.id
-                and public_body_tags.name in (' + category_list + ')) = 0']
-        elsif @tag.size == 1
-            @tag.upcase!
-            conditions = ['first_letter = ?', @tag]
+            @public_bodies = PublicBody.paginate(
+                :order => "public_bodies.name", :page => params[:page], :per_page => 1000 # fit all councils on one page
+                )
         else
-            conditions = ['(select count(*) from public_body_tags where public_body_tags.public_body_id = public_bodies.id
-                and public_body_tags.name = ?) > 0', @tag]
+            if @tag.size == 1
+                @tag.upcase!
+                @public_bodies = PublicBody.paginate(
+                    :order => "public_bodies.name", :page => params[:page], :per_page => 1000, # fit all councils on one page
+                    :conditions => ['first_letter = ?', @tag])              
+            else
+                if @tag == 'other'
+                    category_list = PublicBody.categories
+                    @public_bodies = PublicBody.tagged_with(category_list, :exclude => true).paginate(
+                    :order => "public_bodies.name", :page => params[:page], :per_page => 1000 # fit all councils on one page
+                    )
+                else
+                    @public_bodies = PublicBody.tagged_with(@tag, :on => :tags).paginate(
+                    :order => "public_bodies.name", :page => params[:page], :per_page => 1000 # fit all councils on one page
+                    )
+                end
+            end             
         end
-        @public_bodies = PublicBody.paginate(
-            :order => "public_bodies.name", :page => params[:page], :per_page => 1000, # fit all councils on one page
-            :conditions => conditions
-            )
+            
         if @tag.size == 1
             @description = "beginning with '" + @tag + "'"
         else

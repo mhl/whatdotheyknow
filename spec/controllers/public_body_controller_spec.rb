@@ -51,7 +51,9 @@ describe PublicBodyController, "when listing bodies" do
 
     it "should list a tagged thing on the appropriate list page, and others on the other page, and all still on the all page" do
         public_bodies(:humpadink_public_body).tag_string = "foo local_council"
-
+        public_bodies(:humpadink_public_body).save
+        public_bodies(:humpadink_public_body).reload
+        
         get :list, :tag => "local_council"
         response.should render_template('list')
         assigns[:public_bodies].should == [ public_bodies(:humpadink_public_body) ]
