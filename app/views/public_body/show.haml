@@ -1,0 +1,86 @@
+- @title = h(@public_body.name) + " - view and make #{t("law")} requests"
+#request_sidebar
+  %h2 Track this authority
+  = render :partial => 'track/tracking_links', :locals => { :track_thing => @track_thing, :own_request => false, :location => 'sidebar' }
+  %h2 More about this authority
+  - if !@public_body.calculated_home_page.nil?
+    = link_to "Home page", @public_body.calculated_home_page
+    %br
+  - if !@public_body.publication_scheme.empty?
+    = link_to "Publication scheme", @public_body.publication_scheme
+    %br
+  - if !@public_body.charity_number.empty?
+    = link_to "Charity overview", 'http://www.charity-commission.gov.uk/SHOWCHARITY/RegisterOfCharities/CharityFramework.aspx?RegisteredCharityNumber=' + @public_body.charity_number
+    %br
+  = link_to "View #{t("tla")} email address", view_public_body_email_url(@public_body.url_name)
+%h1=h(@public_body.name)
+%p.subtitle
+  =@public_body.type_of_authority(true)
+  =t("public_body.location")
+  - if not @public_body.short_name.empty?
+    , also called
+    = h(@public_body.short_name)
+  - if !@user.nil? && @user.admin_page_links?
+    (
+    = link_to "admin", public_body_admin_url(@public_body)
+    )
+- if @public_body.has_notes? && (@public_body.is_requestable? || @public_body.not_requestable_reason == 'bad_contact')
+  %p= @public_body.notes_as_html
+- if @public_body.eir_only?
+  %p You can only request information about the environment from this authority.
+#stepwise_make_request
+  %strong
+    - if @public_body.is_requestable? || @public_body.not_requestable_reason == 'bad_contact'
+      - make = 'Make'
+      - if @searched_to_send_request
+        Next,
+        - make = 'make'
+      - if @public_body.eir_only?
+        = link_to make + " a new Environmental Information request", new_request_to_body_url(:public_body_id => @public_body.id.to_s)
+      - else
+        = link_to make + t("public_body.new_request"), new_request_to_body_url(:public_body_id => @public_body.id.to_s)
+      to
+      = h(@public_body.name)
+    - elsif @public_body.has_notes?
+      = @public_body.notes_as_html
+    - elsif @public_body.not_requestable_reason == 'not_apply'
+      t("public_body.not_apply")
+    - elsif @public_body.not_requestable_reason == 'defunct'
+      This authority no longer exists, so you cannot make a request to it.
+    - else
+      For an unknown reason, it is not possible to make a request to this authority.
+- unless @xapian_requests.nil?
+  - if @xapian_requests.results.empty?
+    - if @public_body.eir_only?
+      %h2 Environmental Information Regulations requests made
+      %p
+        Nobody has made any Environmental Information Regulations requests to
+        = h(@public_body.name)
+        using this site yet.
+    - else
+      %h2=t("public_body.requests_made")
+      %p
+        Nobody has made any
+        =t("law")
+        requests to
+        = h(@public_body.name)
+        using this site yet.
+  - else
+    %h2
+      - if @public_body.eir_only?
+        = pluralize(@public_body.info_requests.size, "Environmental Information Regulations request")
+        made
+      - else
+        = pluralize(@public_body.info_requests.size, "Freedom of Information request")
+        made
+      = @page_desc
+      - for result in @xapian_requests.results
+        = render :partial => 'request/request_listing_via_event', :locals => { :event => result[:model], :info_request => result[:model].info_request }
+      = will_paginate WillPaginate::Collection.new(@page, @per_page, @public_body.info_requests.size)
+      %p Only requests made using WhatDoTheyKnow.com are shown.
+- else
+  - if @public_body.eir_only?
+    %h2 Environmental Information Regulations requests made
+  - else
+    %h2 Freedom of Information requests made
+  %p The search index is currently offline, so we can't show the Freedom of Information requests that have been made to this authority.

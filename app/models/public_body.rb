@@ -289,7 +289,7 @@ class PublicBody < ActiveRecord::Base
                 if first
                     # terrible that Ruby/Rails doesn't have an equivalent of ucfirst
                     # (capitalize shockingly converts later characters to lowercase)
-                    desc = desc[0,1].capitalize + desc[1,desc.size]
+                    desc.capitalize!
                     first = false
                 end
                 if html

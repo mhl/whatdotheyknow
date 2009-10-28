@@ -2,6 +2,8 @@
 # See http://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
 
 en_nz:
+  law: "Official Information Act"
+  tla: "OIA"
   default:
     css: "main_nz.css"
     title: "FYI - file and browse Official Information Act (OIA) requests"
@@ -14,3 +16,9 @@ en_nz:
   frontpage:
     header: "Make or explore Official Information Act requests"
     body_name: "name of the NZ public authority"
+  public_body:
+    location: "in New Zealand"
+    not_apply: "Official Information Act law does not apply to this authority, so you cannot make a request to it."
+    new_request: " a new Official Information Act request"
+    requests_made: "Official Information Act requests made"
+    no_requests: "Nobody has made any Official Information Act requests to"

@@ -2,6 +2,8 @@
 # See http://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
 
 en:
+  law: "Freedom of Information"
+  tla: "FOI"
   default:
     css: "main.css"
     title: "WhatDoTheyKnow - file and browse Freedom of Information (FOI) requests"
@@ -14,3 +16,9 @@ en:
   frontpage:
     header: "Make or explore Freedom of Information requests"
     body_name: "name of the UK public authority"
+  public_body:
+    location: "in the UK"
+    not_apply: "Freedom of Information law does not apply to this authority, so you cannot make a request to it."
+    new_request: " a new Freedom of Information request"
+    requests_made: "Freedom of Information requests made"
+    no_requests: "Nobody has made any Freedom of Information requests to"
